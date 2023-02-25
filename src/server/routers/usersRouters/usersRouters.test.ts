@@ -25,7 +25,7 @@ afterAll(async () => {
 });
 
 const mockUser: UserStructure = {
-  username: "Diana",
+  username: "Didi",
   password: "12345678",
   email: "didi@didi.com",
   avatar: "hola.jpg",
@@ -48,6 +48,10 @@ describe("Given a POST '/users/create' endpoint", () => {
 });
 
 describe("Given a POST '/users/login'", () => {
+  beforeAll(async () => {
+    await User.create(mockUser);
+  });
+
   describe("When it receives a request with name 'Diana' and password '12345678'", () => {
     test("Then it should return a status code 200", async () => {
       const loginUrl = "/users/login";
