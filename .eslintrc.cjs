@@ -6,15 +6,23 @@ module.exports = {
   extends: ["xo", "prettier"],
   overrides: [
     {
+      extends: ["xo-typescript", "prettier"],
+      files: ["*.ts"],
       rules: {
         "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/consistent-type-assertions": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
       },
-      extends: ["xo-typescript", "prettier"],
-      files: ["*.ts", "*.tsx"],
     },
     {
       files: ["src/**/models/**/*.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
+    },
+    {
+      files: ["src/**/routers/**/*.ts"],
+      rules: {
+        "@typescript-eslint/no-unsafe-call": "off",
+      },
     },
   ],
   parserOptions: {

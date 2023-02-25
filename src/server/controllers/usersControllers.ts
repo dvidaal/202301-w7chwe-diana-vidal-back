@@ -4,14 +4,14 @@ import User from "../../database/models/User.js";
 
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await User.find().exec();
+    const users = await User.find();
 
     res.status(200).json({ users });
   } catch (error) {
     const customError = new CustomError(
       error.message,
       500,
-      "Couldn't show the robots"
+      "Couldn't show the users"
     );
     next(customError);
   }
