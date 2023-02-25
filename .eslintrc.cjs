@@ -7,7 +7,22 @@ module.exports = {
   overrides: [
     {
       extends: ["xo-typescript", "prettier"],
-      files: ["*.ts", "*.tsx"],
+      files: ["*.ts"],
+      rules: {
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/consistent-type-assertions": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+      },
+    },
+    {
+      files: ["src/**/models/**/*.ts"],
+      rules: { "@typescript-eslint/naming-convention": "off" },
+    },
+    {
+      files: ["src/**/routers/**/*.ts"],
+      rules: {
+        "@typescript-eslint/no-unsafe-call": "off",
+      },
     },
   ],
   parserOptions: {
@@ -15,6 +30,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "new-cap": ["error", { capIsNewExceptions: ["Router"] }],
     "no-implicit-coercion": "off",
   },
 };
