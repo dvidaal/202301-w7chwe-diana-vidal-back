@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { createUser, getUsers } from "../../controllers/usersControllers.js";
+import {
+  createUser,
+  getUsers,
+  loginUser,
+} from "../../controllers/usersControllers.js";
 import multer from "multer";
 
 export const usersRouter = Router();
@@ -15,5 +19,6 @@ const storage = multer.diskStorage({
 
 export const upload = multer({ storage });
 
-usersRouter.get("/", getUsers);
+usersRouter.get("/get", getUsers);
+usersRouter.post("/login", loginUser);
 usersRouter.post("/create", upload.single("avatar"), createUser);
