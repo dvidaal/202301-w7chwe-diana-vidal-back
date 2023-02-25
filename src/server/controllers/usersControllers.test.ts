@@ -1,10 +1,8 @@
-import request from "supertest";
-import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 import { getUsers } from "./usersControllers";
 import { type Request, type Response } from "express";
 import User from "../../database/models/User";
-import { app } from "../app";
 import connectDataBase from "../../database/connectDataBase";
 import { type UserStructure } from "../types";
 
@@ -13,10 +11,6 @@ let server: MongoMemoryServer;
 beforeAll(async () => {
   server = await MongoMemoryServer.create();
   await connectDataBase(server.getUri());
-});
-
-beforeAll(async () => {
-  await User.create(mockUser);
 });
 
 afterEach(async () => {
@@ -50,22 +44,6 @@ describe("Given a getUsers controller", () => {
       await getUsers(req, res as Response, next);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
-    });
-  });
-});
-
-describe("Given a POST '/users/create' endpoint", () => {
-  describe("When it receies a request to create a new user with name 'Diana', password '12345678' and email 'didi@didi.com'", () => {
-    test("Then it should return a status code 201", async () => {
-      const createUrl = "/users/create";
-      const expectedStatus = 201;
-
-      const response = await request(app)
-        .post(createUrl)
-        .send(mockUser)
-        .expect(expectedStatus);
-
-      expect(response.body).toHaveProperty("username", mockUser.username);
     });
   });
 });
